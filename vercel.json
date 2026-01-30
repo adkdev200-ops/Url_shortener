@@ -1,14 +1,8 @@
 {
-  "builds": [
+  "rewrites": [
     {
-      "src": "shortener/wsgi.py",
-      "use": "@vercel/python"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "shortener/wsgi.py"
+      "source": "/(.*)",
+      "destination": "shortener/wsgi.py"
     }
   ]
 }
