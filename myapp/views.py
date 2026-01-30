@@ -114,4 +114,4 @@ def delete_url(request, id):
 
 def logout_page(request):
     logout(request)
-    redirect ('home')
+    return redirect ('home')
