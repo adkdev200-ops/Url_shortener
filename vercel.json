@@ -1,14 +1,14 @@
 {
-    "builds": [
-        {
-            "src": "shortener/wsgi.py",
-            "use": "@vercel/python"
-        }
-    ],
-    "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "shortener/wsgi.py"
-        }
-    ]
+  "builds": [
+    {
+      "src": "shortener/wsgi.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "shortener/wsgi.py"
+    }
+  ]
 }
