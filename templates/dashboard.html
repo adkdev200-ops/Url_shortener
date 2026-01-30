@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<nav class="flex items-center justify-between px-6 py-4">
+  <a href="/" class="text-2xl font-bold">
+    <span class="text-indigo-400">Short</span>ify
+  </a>
+
+  <a href="{% url 'profile' %}">
+    <img src = "{{user.additional.profile_pic.url}}"
+         class="w-10 h-10 rounded-full border-2 border-indigo-500">
+  </a>
+</nav>
+
+<div class="max-w-6xl mx-auto px-4 mt-10">
+
+  <h1 class="text-3xl font-bold mb-8">Dashboard 📊</h1>
+
+  <!-- Stats -->
+  <div class="mb-8">
+    <div class="bg-slate-900/80 rounded-2xl p-6 shadow-lg inline-block">
+      <p class="text-slate-400 text-sm">Total URLs</p>
+      <h2 class="text-4xl font-bold mt-2">{{ total_urls }}</h2>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="overflow-x-auto bg-slate-900/80 rounded-2xl shadow-2xl">
+    <table class="w-full text-left">
+      <thead>
+        <tr class="text-slate-400 text-sm border-b border-slate-700">
+          <th class="px-6 py-4">Long URL</th>
+          <th class="px-6 py-4">Short URL</th>
+          <th class="px-6 py-4">Clicks</th>
+          <th class="px-6 py-4">Created</th>
+          <th class="px-6 py-4 text-right">Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for url in urls %}
+        <tr class="group border-b border-slate-800 hover:bg-slate-800/50 transition">
+
+          <td class="px-6 py-4 truncate max-w-xs text-slate-300">
+            {{ url.long_url }}
+          </td>
+
+          <td class="px-6 py-4 text-indigo-400 font-medium">
+            {{ request.get_host }}/{{ url.alias }}
+          </td>
+
+          <td class="px-6 py-4">
+            <span class="px-3 py-1 bg-indigo-600/20 text-indigo-400 rounded-full text-sm">
+              {{ url.no_of_clicks }}
+            </span>
+          </td>
+
+          <td class="px-6 py-4 text-slate-400 text-sm">
+            {{ url.created_at|date:"M d, Y" }}
+          </td>
+
+          <!-- Delete -->
+          <td class="px-6 py-4 text-right">
+            <form method="POST" action="{% url 'delete_url' url.id %}">
+              {% csrf_token %}
+              <button
+                type="submit"
+                class="text-red-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition"
+                title="Delete">
+                🗑
+              </button>
+            </form>
+          </td>
+
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="5" class="text-center py-10 text-slate-500">
+            No URLs shortened yet.
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+</div>
+{% endblock %}

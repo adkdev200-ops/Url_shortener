@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Link Not Found{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center px-4">
+
+  <div class="max-w-md w-full bg-slate-900/80 backdrop-blur rounded-2xl shadow-2xl p-10 text-center">
+
+    <!-- Icon -->
+    <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-red-600/20 flex items-center justify-center">
+      <span class="text-3xl">⚠️</span>
+    </div>
+
+    <!-- Heading -->
+    <h1 class="text-3xl font-bold mb-3">
+      Link Not Found
+    </h1>
+
+    <!-- Message -->
+    <p class="text-slate-400 mb-8">
+      The short URL you’re trying to access doesn’t exist or may have been removed.
+    </p>
+
+    <!-- Actions -->
+    <div class="flex flex-col gap-4">
+      <a href="/"
+         class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 transition font-semibold">
+        Go to Home
+      </a>
+
+      <a href="{% url 'dashboard' %}"
+         class="w-full py-3 rounded-xl border border-slate-700 hover:bg-slate-800 transition text-slate-300">
+        View Dashboard
+      </a>
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}
