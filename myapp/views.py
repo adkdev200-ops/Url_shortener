@@ -71,11 +71,12 @@ def home_page(request):
 
 
 
+@login_required
 def dashboard_page(request):
     all_urls = ShortedUrl.objects.all()
     return render(request, 'dashboard.html', {'urls' : all_urls, 'total_urls' : all_urls.count()})
 
-
+@login_required
 def profile_page(request):
     if request.method == 'POST':
         fname = request.POST.get('first_name')
@@ -105,7 +106,7 @@ def redirector(request, alias):
         return redirect(url.long_url)
     except:
         return render(request, 'nosuchurl.html')
-
+@login_required
 def delete_url(request, id):
     url = get_object_or_404(ShortedUrl, id = id)
     url.delete()
